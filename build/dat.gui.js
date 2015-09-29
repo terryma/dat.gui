@@ -2577,6 +2577,11 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
           controller.initialValue = value;
           controller.setValue(value);
 
+          // Trigger onFinishChange. Otherwise it doesn't get triggered for
+          // StringController and NumberController
+          if (controller.__onFinishChange) {
+            controller.__onFinishChange.call(controller, value);
+          }
         }
 
       }
